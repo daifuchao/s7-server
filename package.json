@@ -1,0 +1,37 @@
+{
+  "name": "s7-1200-sim",
+  "version": "1.0.0",
+  "description": "纯 Node.js 实现的西门子 S7-1200 (S7comm / ISO-on-TCP) 模拟服务端，内置 DB5 / DB6 / DB7",
+  "main": "src/index.js",
+  "bin": {
+    "s7-1200-sim": "src/index.js"
+  },
+  "scripts": {
+    "start": "node src/index.js",
+    "start:1102": "node src/index.js --port 1102",
+    "sim": "node src/index.js --port 1102 --live --verbose",
+    "test": "node test/client-demo.js 1102",
+    "test:raw": "node test/raw-proto-test.js 1102",
+    "test:bulk": "node test/bulk-read-test.js 1102",
+    "test:logic": "node test/logic-test.js 1102",
+    "test:persist": "node test/persist-test.js"
+  },
+  "keywords": [
+    "siemens",
+    "s7",
+    "s7-1200",
+    "s7comm",
+    "snap7",
+    "plc",
+    "simulator",
+    "iso-on-tcp"
+  ],
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "nodes7": "^0.3.18"
+  },
+  "engines": {
+    "node": ">=16"
+  }
+}

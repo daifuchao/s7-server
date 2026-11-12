@@ -1,0 +1,101 @@
+{
+  "host": "0.0.0.0",
+  "port": 102,
+  "pduSize": 960,
+  "merkersSize": 1024,
+  "inputsSize": 256,
+  "outputsSize": 256,
+  "dbs": [
+    {
+      "number": 5,
+      "size": 1024,
+      "name": "DB5_ProcessData",
+      "init": {
+        "REAL0": 0.0,
+        "REAL4": 0.0,
+        "INT8": 0,
+        "INT10": 0,
+        "DINT12": 0,
+        "X16.0": false,
+        "X16.1": false,
+        "X16.2": false,
+        "BYTE20": 20,
+        "BYTE21": 12,
+        "STR22": "S7-1200 SIM",
+        "INT356": 0,
+        "INT358": 0
+      }
+    },
+    {
+      "number": 6,
+      "size": 1024,
+      "name": "DB6_Setpoints",
+      "init": {
+        "REAL0": 25.0,
+        "REAL4": 60.0,
+        "INT8": 100,
+        "X12.0": false,
+        "INT372": 0,
+        "INT374": 0
+      }
+    },
+    {
+      "number": 7,
+      "size": 512,
+      "name": "DB7_Status",
+      "init": {
+        "X0.0": false,
+        "X0.1": false,
+        "INT2": 0,
+        "INT4": 0,
+        "REAL8": 0.0,
+        "DWORD12": 0
+      }
+    }
+  ],
+  "simulation": {
+    "enabled": false,
+    "intervalMs": 1000
+  },
+  "logic": [
+    {
+      "name": "心跳1：写 DB6.INT372 → DB5.INT356 = 该值 + 1",
+      "on": {
+        "db": 6,
+        "offset": 372,
+        "type": "INT"
+      },
+      "do": {
+        "db": 5,
+        "offset": 356,
+        "type": "INT",
+        "op": "copyadd",
+        "step": 1
+      },
+      "trigger": "write"
+    },
+    {
+      "name": "心跳2：写 DB6.INT374 → DB5.INT358 = 该值 + 1",
+      "on": {
+        "db": 6,
+        "offset": 374,
+        "type": "INT"
+      },
+      "do": {
+        "db": 5,
+        "offset": 358,
+        "type": "INT",
+        "op": "copyadd",
+        "step": 1
+      },
+      "trigger": "write"
+    }
+  ],
+  "autoCreateDb": false,
+  "autoCreateDbSize": 1024,
+  "persistence": {
+    "enabled": true,
+    "file": "data/state.json",
+    "debounceMs": 300
+  }
+}
