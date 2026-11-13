@@ -136,5 +136,5 @@ async function main() {
 
 main().catch((err) => {
   console.error(err);
-  process.exit(1);
+  process.exit(1);//退出码 0 表示成功，非 0 表示失败（1 是最常用的"通用错误"）
 });
